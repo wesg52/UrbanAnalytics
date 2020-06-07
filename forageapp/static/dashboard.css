@@ -1,0 +1,102 @@
+
+main {
+  margin-left: 10em;
+
+}
+
+.grid {
+  display: grid;
+  width: 94%;
+  justify-items: center;
+  grid-template-columns: 50% 50%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.grid-element{
+  
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 0em;
+  grid-column: 0 / span 2;
+  height: 75%
+}
+
+#panel{
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2
+}
+
+#tract-map{
+  height: 100%;
+  width: 100%;
+}
+
+#main-dashboard-table{
+  height: 100%;
+  width: 100%;
+}
+
+#plot-grid{
+  grid-template-columns: 50% 50%;
+  display: grid;
+  width: 94%;
+  height: 100%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+fill: none;
+stroke: #00F;
+}
+
+/* The sidebar menu */
+.tabnav {
+    overflow: hidden;
+    border: 1px solid rgb(46, 46, 46);
+    background-color: #3b3b3b;
+  }
+  
+  /* The navigation menu links */
+  .tabnav a {
+    padding: .25em;
+    text-decoration: none;
+    font-size: 1.25em;
+    color: white;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    padding-left: .5em;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .tabnav a:hover {
+    background-color: #474747;
+  }
+
+  .tabnav a:focus{
+    background-color: #797979;
+  }
+
+  .tablink {
+    background-color: #181818;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+    text-align: center;
+  }

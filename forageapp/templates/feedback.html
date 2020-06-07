@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Forage Feedback</h1>
+<h2>Let us know what you think of our beta product!</h2>
+
+<div class="survey-section">
+    <form method="POST">
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.occupation.label(class="form-control-label") }}
+                {% if form.occupation.errors %}
+                    {{ form.occupation(class="form-control form-control-md is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.occupation.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.occupation(class="form-control form-control-md") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <!-- Radio ease of use and usefulness fields -->
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.op_index_useful.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.op_index_useful %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.op_index_easy.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.op_index_useful %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.custom_search_useful.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.custom_search_useful %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.custom_search_easy.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.custom_search_easy %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.auto_rent_useful.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.auto_rent_useful %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.auto_rent_easy.label(class="form-control-label") }}
+                <div class="form-control form-control-md">
+                    {% for subfield in form.auto_rent_easy %}
+                    <tr>
+                        <td>{{ subfield }} </td>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </fieldset>
+        
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.feature_feedback.label(class="form-control-label") }}
+                {{ form.feature_feedback(class="form-control form-control-md") }}
+            </div>
+            <div class="form-group">
+                {{ form.cities.label(class="form-control-label") }}
+                {{ form.cities(class="form-control form-control-md") }}
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

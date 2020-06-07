@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Choose Your City</h1>
+    <p>More cities to come soon! Take the Forage Feedback survey to suggest what cities you would like to see.</p>
+    <main role="main" class="grid-container">
+        <div class="grid-item"><a href="{{ url_for('product.opp_index', city='NYC') }}">NYC</a></div>
+        <div class="grid-item"><a href="{{ url_for('product.opp_index', city='LA') }}">LA</a></div>
+        <div class="grid-item"><a href="{{ url_for('product.opp_index', city='DC') }}">DC</a></div>
+        <div class="grid-item"><a href="{{ url_for('product.opp_index', city='Chicago') }}">Chicago</a></div>
+
+    </main>
+  {% endblock content %}

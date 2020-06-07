@@ -1,0 +1,14 @@
+json2html
+numpy
+scikit-learn
+scipy
+pandas
+shapely
+geopandas
+flask
+flask_wtf
+wtforms
+requests
+colour
+gunicorn
+python-dotenv

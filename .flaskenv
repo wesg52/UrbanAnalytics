@@ -1,0 +1,3 @@
+FLASK_APP=forageapp.py
+FLASK_ENV=development
+MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiZm9yYWdlciIsImEiOiJjazVlNWNhZWMyM3hjM29wMzgwd3NreWViIn0.0YEY42SR4OqjL_T4tghA_w"

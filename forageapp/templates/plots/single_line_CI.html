@@ -1,0 +1,76 @@
+
+<canvas id="{{graph_payload['plot_title'] + '-canvas'}}"></canvas>
+<script>
+graph_payload = JSON.parse('{{ graph_payload | tojson | safe}}');
+data = graph_payload.data;
+xvals = graph_payload.xvals;
+CIs = graph_payload.CI;
+
+upperbound = data.map(function(v, i){
+    return v + CIs[i];
+})
+lowerbound = data.map(function(v, i){
+    return v - CIs[i];
+})
+
+graph_element = graph_payload.element;
+graph_title = graph_payload.plot_title;
+legend = graph_payload.legend;
+
+new Chart(document.getElementById(graph_title + '-canvas'), {
+  type: "bar",
+  data: {
+    labels: xvals,
+    datasets: [
+      {
+        type: "line",
+        label: graph_title,
+        backgroundColor: "rgb(0, 0, 255, 0.5)",
+        borderColor: "rgb(0, 0, 255)",
+        hoverBorderColor: "rgb(0, 0, 255)",
+        fill: false,
+        tension: 0,
+        data: data,
+      },
+      {
+        label: "Confidence Interval",
+        type: "line",
+        backgroundColor: "rgb(75, 192, 255, 0.5)",
+        borderColor: "transparent",
+        pointRadius: 0,
+        fill: 0,
+        tension: 0,
+        data: upperbound,
+      },
+      {
+        type: "line",
+        label: '',
+        backgroundColor: "rgb(75, 192, 255, 0.5)",
+        borderColor: "transparent",
+        pointRadius: 0,
+        fill: 0,
+        tension: 0,
+        data: lowerbound,
+      }
+      
+    ]
+  },
+  options: {
+      title: {
+        display: true,
+        text: graph_title
+      },
+      legend: {
+        labels: {
+          filter: function(item, d){
+            return item.text != ""
+          }
+        }
+      }
+    }
+
+});
+
+</script>
+
+

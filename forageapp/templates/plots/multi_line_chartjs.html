@@ -1,0 +1,27 @@
+
+<canvas id="{{graph_payload['plot_title'] + '-canvas'}}" ></canvas>
+<script>
+graph_payload = JSON.parse('{{ graph_payload | tojson | safe}}');
+data = graph_payload.data;
+xvals = graph_payload.xvals;
+
+graph_element = graph_payload.element;
+graph_title = graph_payload.plot_title;
+legend = graph_payload.legend;
+
+new Chart(document.getElementById(graph_title + '-canvas'), {
+    type: 'line',
+    data: {
+        labels: xvals,
+        datasets: data
+    },
+    options: {
+      title: {
+        display: true,
+        text: graph_title
+      }
+    }
+  });
+</script>
+
+

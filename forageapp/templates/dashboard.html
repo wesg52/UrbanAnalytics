@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% endblock %}
+{% block content %}
+<script>
+  var tract_ids = '{{tract_ids | tojson | safe}}';
+  function switchTabs(tab){
+    $.ajax({
+        type: 'GET',
+        contentType: 'application/json',
+        url: "{{url_for('product._render_panel')}}",
+        dataType : 'html',
+        data : {
+          "tab": tab,
+          "tract_ids": tract_ids
+        },
+        success : function(result) {
+          jQuery("#panel-container").empty();
+          jQuery("#panel-container").append(result);}
+        // },error : function(result){
+        // }
+    });
+  }
+</script>
+
+
+<div class='tabnav'>
+    <a href="javascript:switchTabs('overview')" class="tablink" id='Overview'>Overview</a>
+    <a href="javascript:switchTabs('housing')" class="tablink" id='Housing'>Housing</a>
+    <a href="javascript:switchTabs('demographics')" class="tablink" id='Demographic'>Demographic</a>
+    <a href="javascript:switchTabs('economics')" class="tablink" id='Employment'>Employment</a>
+</div>
+
+<div class='grid'>
+  <div id='main-dashboard-table'>
+    {{ table | safe }}
+  </div>
+  <div id='tract-map'>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoiZm9yYWdlciIsImEiOiJjazVlNTV6ZmwxemwwM2twbzVocWljZjR1In0.g7pCpemtWzpHN6WEXMnFUw';
+      var map_border = .1;
+      var bounds = [
+        [Number("{{ bounds[0] }}") - map_border,
+        Number("{{ bounds[1] }}") - map_border], // Southwest coordinates
+        [Number("{{ bounds[2] }}") + map_border,
+        Number("{{ bounds[3] }}") + map_border] // Northeast coordinates
+      ];
+      var map = new mapboxgl.Map({
+        container: 'tract-map',
+        style: 'mapbox://styles/forager/ck5e8bzry0fkd1iqmofttjes4',
+        center: [Number("{{ bounds[2] }}") + Number("{{ bounds[0] }}") / 2,
+                Number("{{ bounds[3] }}") + Number("{{ bounds[1] }}") / 2],
+        zoom: 8,
+        maxBounds: bounds
+      });
+      map.dragRotate.disable();
+      map.touchZoomRotate.disableRotation();
+    
+      map.on('load', function() {
+        map.addSource('area', {
+            'type': 'geojson',
+            'data': JSON.parse('{{ geo_data | tojson | safe}}')
+        });
+
+        map.addLayer({
+            'id': 'tractlayer',
+            'type': 'line',
+            'source': 'area',
+            'paint': {
+                'line-color': '#00F',
+            }
+        });
+    });
+
+    </script>
+  </div>
+</div>
+  <div id='panel-container'>
+    {% include "graph_panel.html" %}
+  </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+
+<canvas id="{{graph_payload['plot_title'] + '-canvas'}}"></canvas>
+<script>
+graph_payload = JSON.parse('{{ graph_payload | tojson | safe}}');
+plot_data = graph_payload.data;
+
+graph_element = graph_payload.element;
+graph_title = graph_payload.plot_title;
+legend = graph_payload.legend;
+colors = graph_payload.colors
+
+new Chart(document.getElementById(graph_title + '-canvas'), {
+    type: 'pie',
+    data: {
+        labels: legend,
+        datasets: [{
+            data: plot_data,
+            backgroundColor: colors
+        }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: graph_title
+      },
+      legend: {
+          position: 'right'
+      }
+    }
+  });
+</script>

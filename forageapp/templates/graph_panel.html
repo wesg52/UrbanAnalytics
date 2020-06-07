@@ -1,0 +1,23 @@
+
+<div id='plot-grid'>
+  {% for element in panel_data %}
+    <div class='grid-element' id="{{ element }}">
+      {% with graph_payload = panel_data[element] %}
+
+        {% if graph_payload['type'] == 'census_single_line_CI' %}
+          {% include "plots/single_line_CI.html" %}
+        {% endif %}
+
+        {% if graph_payload['type'] == 'multi_line' %}
+          {% include "plots/multi_line_chartjs.html" %}
+        {% endif %}
+
+        {% if graph_payload['type'] == 'pie' %}
+          {% include "plots/pie.html" %}
+        {% endif %}
+
+      {% endwith %}
+    </div>
+  {% endfor %}
+</div>
+
